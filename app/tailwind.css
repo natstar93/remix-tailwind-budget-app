@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  @font-face {
+    font-family: Proxima Nova;
+    font-weight: 400;
+    src: url(./fonts/proxima-nova/ProximaNova-Regular.ttf) format('ttf');
+  }
+  @font-face {
+    font-family: Proxima Nova;
+    font-weight: 500;
+    src: url(./fonts/proxima-nova/ProximaNova-Semibold.ttf) format('ttf');
+  }
+  header, footer {
+    @apply px-24 py-6 bg-slate-800 dark:bg-white
+  }
+  footer {
+    @apply bottom-1
+  }
+  body {
+    @apply  bg-white dark:bg-slate-800 dark:text-white text-slate-800 divide-y divide-brand-green
+  }
+  h1 {
+    @apply text-4xl font-bold text-brand-green
+  }
+  th, td {
+    @apply px-3 py-1
+  }
+
+  a {
+    @apply text-brand-green
+  }
+}
