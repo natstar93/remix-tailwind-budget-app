@@ -13,23 +13,30 @@
     font-weight: 500;
     src: url(./fonts/proxima-nova/ProximaNova-Semibold.ttf) format('ttf');
   }
-  header, footer {
-    @apply px-24 py-6 bg-slate-800 dark:bg-white
-  }
-  footer {
-    @apply bottom-1
-  }
   body {
-    @apply  bg-white dark:bg-slate-800 dark:text-white text-slate-800 divide-y divide-brand-green
+    @apply bg-white dark:bg-slate-800 dark:text-white text-slate-800 divide-y divide-brand-green;
+  }
+  section {
+    @apply flex flex-col items-center;
+  }
+  header,
+  footer {
+    @apply px-24 py-6 bg-slate-800 dark:bg-white;
   }
   h1 {
-    @apply text-4xl font-bold text-brand-green
+    @apply text-4xl font-bold text-brand-green;
   }
-  th, td {
-    @apply px-3 py-1
+  th,
+  td {
+    @apply px-3 py-1 ;
   }
-
   a {
-    @apply text-brand-green
+    @apply text-brand-green;
+  }
+  input {
+    @apply border-solid border-2 border-brand-green text-brand-green;
+  }
+  button {
+    @apply rounded-md border-solid border-2 border-brand-green text-brand-green p-2;
   }
 }

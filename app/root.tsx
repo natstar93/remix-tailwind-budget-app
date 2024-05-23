@@ -24,12 +24,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
       </head>
       <body>
         <header>
-          <h1>Budgeting App</h1>
+          <h1><span>Budgeting App</span></h1>
         </header>
-        {children}
-        <ScrollRestoration />
-        <Scripts />
-        <footer>
+        <main className='flex flex-col items-center w-full md:w-auto py-4 bg-white dark:bg-slate-800'>
+          {children}
+        </main>
+        <footer className='min-h-screen'>
           <ul>
             <li>
               <a
@@ -37,11 +37,13 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 href='https://github.com/natstar93'
                 rel='noreferrer'
               >
-                My Github
+                <span>My Github</span>
               </a>
             </li>
           </ul>
         </footer>
+        <ScrollRestoration />
+        <Scripts />
       </body>
     </html>
   );
