@@ -10,6 +10,7 @@ import fakeDb from '~/fakeDb';
 
 export const action = async ({ params, request }: ActionFunctionArgs) => {
   const { expenseId } = params;
+ 
   invariant(expenseId, 'Invalid expenseId');
 
   const formData = await request.formData();
@@ -31,7 +32,7 @@ export default function Expense() {
 
   return (
     <div>
-      <h2>Edit Expense</h2>
+      <h2>Add Expense</h2>
       <Form
         key={record?.id}
         method='post'

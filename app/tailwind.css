@@ -14,21 +14,27 @@
     src: url(./fonts/proxima-nova/ProximaNova-Semibold.ttf) format('ttf');
   }
   body {
-    @apply bg-white dark:bg-slate-800 dark:text-white text-slate-800 divide-y divide-brand-green;
+    @apply flex flex-col min-h-screen bg-white dark:bg-slate-800 dark:text-white text-slate-800;
   }
   section {
-    @apply flex flex-col items-center;
+    @apply flex flex-col;
   }
   header,
   footer {
-    @apply px-24 py-6 bg-slate-800 dark:bg-white;
+    @apply px-6 py-4 md:px-12 bg-slate-800 dark:bg-white font-bold text-brand-green;
+  }
+  header {
+    @apply text-4xl
   }
   h1 {
     @apply text-4xl font-bold text-brand-green;
   }
+  h2 {
+    @apply text-lg font-bold ;
+  }
   th,
   td {
-    @apply px-3 py-1 ;
+    @apply px-2 py-1 ;
   }
   a {
     @apply text-brand-green;

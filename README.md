@@ -1,36 +1,14 @@
-# Welcome to Remix + Vite!
+# Budgeting App
 
-📖 See the [Remix docs](https://remix.run/docs) and the [Remix Vite docs](https://remix.run/docs/en/main/guides/vite) for details on supported features.
+Small app to add and edit monthly expenses.
 
-## Development
+Just a little project to practice Remix & Tailwind.
 
-Run the Vite dev server:
+Deployed to Render [here](https://remix-tailwind-budget-app.onrender.com/).
+
+## How to run locally
 
 ```shellscript
+npm i
 npm run dev
 ```
-
-## Deployment
-
-First, build your app for production:
-
-```sh
-npm run build
-```
-
-Then run the app in production mode:
-
-```sh
-npm start
-```
-
-Now you'll need to pick a host to deploy it to.
-
-### DIY
-
-If you're familiar with deploying Node applications, the built-in Remix app server is production-ready.
-
-Make sure to deploy the output of `npm run build`
-
-- `build/server`
-- `build/client`

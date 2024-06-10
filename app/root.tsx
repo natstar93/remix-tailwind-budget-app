@@ -1,18 +1,33 @@
+import fakeDb from '~/fakeDb';
+
 import {
   Links,
   Meta,
   Outlet,
   Scripts,
   ScrollRestoration,
+  redirect,
 } from '@remix-run/react';
-import type { LinksFunction } from '@remix-run/node';
+import type { LinksFunction, MetaFunction } from '@remix-run/node';
 import stylesheet from '~/tailwind.css?url';
 
 export const links: LinksFunction = () => [
   { rel: 'stylesheet', href: stylesheet },
 ];
 
-export function Layout({ children }: { children: React.ReactNode }) {
+export const meta: MetaFunction = () => {
+  return [
+    { title: 'Budgeting App' },
+    { name: 'description', content: 'Monthly expense budgeting' },
+  ];
+};
+
+export const action = async () => {
+  const newRecord = fakeDb.addRecord();
+  return redirect(`/expenses/${newRecord.id}/edit`);
+};
+
+export default function App() {
   return (
     <html lang='en'>
       <head>
@@ -24,11 +39,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
       </head>
       <body>
         <header>
-          <h1><span>Budgeting App</span></h1>
+          <span>Budgeting App</span>
         </header>
-        <main className='flex flex-col items-center w-full md:w-auto py-4 bg-white dark:bg-slate-800'>
-          {children}
-        </main>
+        <Outlet />
         <footer className='min-h-screen'>
           <ul>
             <li>
@@ -47,8 +60,4 @@ export function Layout({ children }: { children: React.ReactNode }) {
       </body>
     </html>
   );
-}
-
-export default function App() {
-  return <Outlet />;
 }
