@@ -42,7 +42,7 @@ export default function App() {
           <span>Budgeting App</span>
         </header>
         <Outlet />
-        <footer className='min-h-screen'>
+        <footer>
           <ul>
             <li>
               <a

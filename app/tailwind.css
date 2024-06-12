@@ -21,7 +21,7 @@
   }
   header,
   footer {
-    @apply px-6 py-4 md:px-12 bg-slate-800 dark:bg-white font-bold text-brand-green;
+    @apply p-6 bg-slate-800 dark:bg-white font-bold text-brand-green;
   }
   header {
     @apply text-4xl

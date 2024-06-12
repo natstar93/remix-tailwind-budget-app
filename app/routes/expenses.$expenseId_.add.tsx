@@ -4,13 +4,20 @@ import {
   json,
   redirect,
 } from '@remix-run/node';
-import { Form, NavLink, useLoaderData } from '@remix-run/react';
+import {
+  Form,
+  NavLink,
+  useLoaderData,
+  isRouteErrorResponse,
+  useRouteError,
+  useNavigate,
+} from '@remix-run/react';
 import invariant from 'tiny-invariant';
 import fakeDb from '~/fakeDb';
 
 export const action = async ({ params, request }: ActionFunctionArgs) => {
   const { expenseId } = params;
- 
+
   invariant(expenseId, 'Invalid expenseId');
 
   const formData = await request.formData();
@@ -19,6 +26,7 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
   fakeDb.editRecord({ id: Number(expenseId), expenseData });
   return redirect('/expenses');
 };
+
 export const loader = async ({ params }: LoaderFunctionArgs) => {
   const { expenseId } = params;
   invariant(expenseId, 'Invalid expenseId');
@@ -26,6 +34,29 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
 
   return json({ record });
 };
+
+export function ErrorBoundary() {
+  const error = useRouteError();
+  const navigate = useNavigate();
+  let errorMessage = 'Unknown Error';
+
+  if (isRouteErrorResponse(error)) {
+    errorMessage = error.data;
+  } else if (error instanceof Error) {
+    const { message } = error;
+    errorMessage = message.replace('Invariant failed:', '');
+  }
+
+  return (
+    <main className='flex flex-col gap-4 md:w-auto m-6 py-4 bg-white dark:bg-slate-800'>
+      <h2>Error</h2>
+      <p>{errorMessage}</p>
+      <Form preventScrollReset>
+        <button onClick={() => navigate(`/expenses`)}>Go back</button>
+      </Form>
+    </main>
+  );
+}
 
 export default function Expense() {
   const { record } = useLoaderData<typeof loader>();

@@ -1,3 +1,5 @@
+import invariant from "tiny-invariant";
+
 type Expense = { id: number; name: string | null; amount: number | null };
 
 const fakeDb = {
@@ -26,7 +28,11 @@ const fakeDb = {
     };
   }) => {
     const { name, amount } = expenseData;
+    invariant(name, 'Expense Name cannot be empty');
+    invariant(Number(amount), 'A value must be supplied');
     const record = fakeDb.data.find((record) => record.id === id);
+    invariant(record, 'Record not found');
+
     const newRecord = {
       ...record,
       id,
@@ -34,6 +40,8 @@ const fakeDb = {
       amount: Number(amount),
     };
     const index = fakeDb.data.findIndex((entry) => id === entry.id);
+    invariant(index, 'Record not found');
+
     fakeDb.data[index] = newRecord;
   },
 

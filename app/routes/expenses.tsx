@@ -4,9 +4,12 @@ import {
   Form,
   NavLink,
   Outlet,
+  isRouteErrorResponse,
   json,
   redirect,
   useLoaderData,
+  useNavigate,
+  useRouteError,
 } from '@remix-run/react';
 
 export const action = async () => {
@@ -16,12 +19,35 @@ export const action = async () => {
 
 export const loader = async () => {
   const records = await fakeDb.getAllRecords();
+
+  // if (Math.random() < 0.1)
+  //   throw new Error('Sorry, the expense records could not be loaded');
   return json({ records });
 };
 
+export function ErrorBoundary() {
+  const error = useRouteError();
+  const navigate = useNavigate();
+  let errorMessage = 'Unknown Error';
+
+  if (isRouteErrorResponse(error)) {
+    errorMessage = error.data;
+  } else if (error instanceof Error) {
+    errorMessage = error.message;
+  }
+
+  return (
+    <main className='flex flex-col flex-grow items-start md:w-auto m-6 py-4 bg-white dark:bg-slate-800'>
+      <h1>Error</h1>
+      <p>{errorMessage}</p>
+      <button onClick={() => navigate(`/expenses`)}>Retry</button>
+    </main>
+  );
+}
+
 export default function Expenses() {
   const { records } = useLoaderData<typeof loader>();
-  const expenseTotal = records.reduce(
+  const expenseTotal = records?.reduce(
     (total, record) => (record?.amount || 0) + total,
     0
   );
@@ -48,29 +74,32 @@ export default function Expenses() {
               </tr>
             </thead>
             <tbody>
-              {records?.map(({ id, name, amount }) => Boolean(id && name && amount) && (
-                <tr key={id} className='border-b-solid border-b-2'>
-                  <td className='w-6/12'>{name}</td>
-                  <td className='w-3/12 text-right'>£{amount}</td>
-                  <td className='w-3/12 '>
-                    <NavLink
-                      to={`/expenses/${id}/edit`}
-                      className=''
-                      preventScrollReset
-                    >
-                      Edit
-                    </NavLink>
-                    {' | '}
-                    <NavLink
-                      to={`/expenses/${id}/delete`}
-                      className=''
-                      preventScrollReset
-                    >
-                      Delete
-                    </NavLink>
-                  </td>
-                </tr>
-              ))}
+              {records?.map(
+                ({ id, name, amount }) =>
+                  Boolean(id && name && amount) && (
+                    <tr key={id} className='border-b-solid border-b-2'>
+                      <td className='w-6/12'>{name}</td>
+                      <td className='w-3/12 text-right'>£{amount}</td>
+                      <td className='w-3/12 '>
+                        <NavLink
+                          to={`/expenses/${id}/edit`}
+                          className=''
+                          preventScrollReset
+                        >
+                          Edit
+                        </NavLink>
+                        {' | '}
+                        <NavLink
+                          to={`/expenses/${id}/delete`}
+                          className=''
+                          preventScrollReset
+                        >
+                          Delete
+                        </NavLink>
+                      </td>
+                    </tr>
+                  )
+              )}
 
               <tr className='font-bold'>
                 <td>Total</td>
