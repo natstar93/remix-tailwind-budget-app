@@ -1,3 +1,6 @@
+import React from 'react';
+
+import Header from './header';
 import fakeDb from '~/fakeDb';
 
 import {
@@ -28,8 +31,10 @@ export const action = async () => {
 };
 
 export default function App() {
+  const [isDarkMode, setIsDarkMode] = React.useState(true);
+
   return (
-    <html lang='en'>
+    <html lang='en' className={isDarkMode ? 'dark' : 'light'}>
       <head>
         <meta charSet='utf-8' />
         <meta name='viewport' content='width=device-width, initial-scale=1' />
@@ -38,11 +43,10 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <header>
-          <span>Budgeting App</span>
-        </header>
+        <Header isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />
         <Outlet />
         <footer>
+
           <ul>
             <li>
               <a
