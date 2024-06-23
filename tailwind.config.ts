@@ -10,6 +10,10 @@ export default {
       },
       colors: {
         'brand-green': '#6bd968',
+        'brand-light': '#a2e79a',
+        'brand-lighter': '#d2f3cc',
+        'brand-dark': '#47bd44',
+        'brand-darker': '#284426'
       },
     },
   },

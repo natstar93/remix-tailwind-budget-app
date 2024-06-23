@@ -62,7 +62,7 @@ export default function Expense() {
   const { record } = useLoaderData<typeof loader>();
 
   return (
-    <div>
+    <div className='shadow-md p-4 bg-white dark:bg-slate-800 rounded-md'>
       <h2>Add Expense</h2>
       <Form
         key={record?.id}

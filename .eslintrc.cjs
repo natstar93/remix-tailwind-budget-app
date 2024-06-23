@@ -71,6 +71,9 @@ module.exports = {
         "plugin:import/recommended",
         "plugin:import/typescript",
       ],
+      rules: {
+        'jsx-quotes': [2, 'prefer-single'],
+      }
     },
 
     // Node

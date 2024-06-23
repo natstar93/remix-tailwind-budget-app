@@ -1,8 +1,4 @@
 import React from 'react';
-
-import Header from './header';
-import fakeDb from '~/fakeDb';
-
 import {
   Links,
   Meta,
@@ -12,6 +8,10 @@ import {
   redirect,
 } from '@remix-run/react';
 import type { LinksFunction, MetaFunction } from '@remix-run/node';
+
+import Header from './header';
+import Footer from './footer';
+import fakeDb from '~/fakeDb';
 import stylesheet from '~/tailwind.css?url';
 
 export const links: LinksFunction = () => [
@@ -42,23 +42,10 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body>
+      <body className='divide-y divide-solid'>
         <Header isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />
         <Outlet />
-        <footer>
-
-          <ul>
-            <li>
-              <a
-                target='_blank'
-                href='https://github.com/natstar93'
-                rel='noreferrer'
-              >
-                <span>My Github</span>
-              </a>
-            </li>
-          </ul>
-        </footer>
+        <Footer />
         <ScrollRestoration />
         <Scripts />
       </body>
